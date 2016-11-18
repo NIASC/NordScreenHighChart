@@ -9,7 +9,8 @@ GET     				/columnAndBarChart 		    controllers.Application.columnAndBarChart
 GET     				/areaAndPieChart 		    controllers.Application.areaAndPieChart
 GET     				/areaAndPieChart 		    controllers.Application.areaAndPieChart
 GET     				/bubbleChart		 		controllers.Application.bubbleChart
-
+GET						/assets/test.txt          		 controllers.Assets.at(path="/public", file="/test.txt")
+GET						/assets/test_combo.txt          		 controllers.Assets.at(path="/public", file="/test_combo.txt")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

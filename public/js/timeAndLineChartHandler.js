@@ -1,51 +1,195 @@
 
 $(function () {
-    $('#lineChart').highcharts({
-        title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
-        },
-        subtitle: {
-            text: null,
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'New York',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }, {
-            name: 'Berlin',
-            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-        }, {
-            name: 'London',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
-    });
+	var options_lineChart = {
+			chart: {
+				renderTo: 'lineChart'
+			},
+			title: {
+				text: 'Cervical Test Coverage (Finland)',
+				x: -20
+			},
+			subtitle: {
+	            text: null,
+	            x: -20
+	        },
+			xAxis: {
+				categories: []
+			},
+			yAxis: {
+				title: {
+					text: 'Test Coverage (%)'
+				},
+				plotLines: [{
+	                value: 0,
+	                width: 1,
+	                color: '#808080'
+	            }]
+			},
+			
+			tooltip: {
+	            valueSuffix: '%'
+	        },
+	        labels: {
+	            items: [{
+	                html: 'Age Groups',
+	                style: {
+	                    left: '40px',
+	                    top: '8px',
+	                    color: 'black',
+	                    font: 'bold 14px "Trebuchet MS", Verdana, sans-serif'
+	                }
+	                
+	            }]
+	        },
+	        legend: {
+	            layout: 'vertical',
+	            align: 'right',
+	            verticalAlign: 'middle',
+	            borderWidth: 0
+	        },
+			series: []
+		};
+	
+	
+	$.get('http://localhost:9000/assets/test.txt', function(data) {
+		// Split the lines
+		
+		var lines = data.split('\n');
+		
+		$.each(lines, function(lineNo, line) {
+			var items = line.split(',');
+			
+			// header line containes categories
+			if (lineNo == 0) {
+				$.each(items, function(itemNo, item) {
+					if (itemNo > 0) options_lineChart.xAxis.categories.push(item);
+				});
+			}
+			// the rest of the lines contain data with their name in the first position
+			else {
+				var series = { 
+					data: []
+				};
+				$.each(items, function(itemNo, item) {
+					if (itemNo == 0) {
+						series.name = item;
+					} else {
+						series.data.push(parseFloat(item));
+					}
+				});
+				options_lineChart.series.push(series);
+			}
+		});
+		var chart = new Highcharts.Chart(options_lineChart);
+	});
+	
+	
+	var options_comboChart = {
+			chart: {
+				renderTo: 'comboChart'
+			},
+			title: {
+				text: 'Cervical Test Coverage (Finland)',
+				x: -20
+			},
+			subtitle: {
+	            text: null,
+	            x: -20
+	        },
+			xAxis: {
+				categories: []
+			},
+			yAxis: {
+				title: {
+					text: 'Test Coverage (%)'
+				},
+				plotLines: [{
+	                value: 0,
+	                width: 1,
+	                color: '#808080'
+	            }]
+			},
+			
+			tooltip: {
+	            formatter: function() {
+	                var s;
+	                if (this.point.name) { // the pie chart
+	                    s = ''+
+	                        this.point.name +': '+ this.y +' fruits';
+	                } else {
+	                    s = ''+
+	                        this.x +': '+ this.y + ' %';
+	                }
+	                return s;
+	            }
+	        },
+	        plotOptions: {
+	            series: {
+	                marker: {
+	                	lineWidth: 2,
+	                	lineColor: 'red',
+	                	fillColor: 'black'
+	                }
+	            }
+	        },
+	        labels: {
+	            items: [{
+	                html: '5 years interval',
+	                style: {
+	                    left: '40px',
+	                    top: '8px',
+	                    color: 'black',
+	                    font: 'bold 14px "Trebuchet MS", Verdana, sans-serif'
+	                }
+	            }]
+	        },
+			series: []
+		};
+	
+	$.get('http://localhost:9000/assets/test_combo.txt', function(data) {
+		// Split the lines
+		
+		var lines = data.split('\n');
+		
+		$.each(lines, function(lineNo, line) {
+			var items = line.split(',');
+			
+			// header line containes categories
+			if (lineNo == 0) {
+				$.each(items, function(itemNo, item) {
+					if (itemNo > 0) options_comboChart.xAxis.categories.push(item);
+				});
+			}
+			// the rest of the lines contain data with their name in the first position
+			else {
+				var series = { 
+					data: []
+				};
+				$.each(items, function(itemNo, item) {
+					if (itemNo == 0) {
+					   if (item != 'Average') {
+						   series.name = item;
+						   series.type = 'column';
+					   } else {
+						   series.name = 'Total';
+						   series.type = 'spline';
+						   series.color = Highcharts.getOptions().colors[8];
+					   }
+					   
+					} else {
+						series.data.push(parseFloat(item));
+					}
+				});
+				options_comboChart.series.push(series);
+			}
+		});
+		var chart = new Highcharts.Chart(options_comboChart);
+	});
+	
+	
+	
+	
+	
     
     $('#timeSeriesChart').highcharts({
         chart: {

@@ -4,6 +4,9 @@ import play.api._
 import play.api.mvc._
 import play.api.i18n.Messages
 
+import scala.io.Source
+import play.api.Play.current
+
 object Application extends Controller {
 
   def index = Action {
@@ -25,5 +28,7 @@ object Application extends Controller {
   def bubbleChart = Action {
     Ok(views.html.bubble(Messages("subheader.bubble")))
   }
+  
+ 
 
 }
