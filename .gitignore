@@ -16,4 +16,5 @@ dist
 bin
 .cache
 .target
-
+public/txt_files
+public/txt_files_years 

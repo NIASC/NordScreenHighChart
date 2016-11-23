@@ -1,4 +1,4 @@
-name := "DemoHighChart"
+name := "NordScreenHighChart"
 
 version := "1.0-SNAPSHOT"
 
