@@ -1,4 +1,4 @@
-Charts for NORDSCREEN project (http://www.nordscreen.org) based on Play application and Highcharts
+This is your new Play application
 =====================================
 
 This file will be packaged with your application, when using `play dist`.
