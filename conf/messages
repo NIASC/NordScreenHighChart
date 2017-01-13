@@ -1,9 +1,8 @@
 
 #Header
-subheader.time_line=Time & Line
-subheader.bar_column=Bar & Column
-subheader.area_pie=Area & Pie
-subheader.bubble=Bubble
+subheader.finland=Finland
+subheader.norway=Norway
+
 
 
 #Chart Labels
