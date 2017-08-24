@@ -6,6 +6,10 @@
 GET     				/                           controllers.Application.index
 GET     				/finland 		            controllers.Application.finland
 GET     				/norway 		            controllers.Application.norway
+GET     				/estonia 		            controllers.Application.estonia
+GET     				/iceland 		            controllers.Application.iceland
+
+
 
 
 

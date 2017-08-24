@@ -1,4 +1,4 @@
-name := "NordscreenCharts"
+name := "nordscreenhighCharts"
 
 version := "1.0-SNAPSHOT"
 

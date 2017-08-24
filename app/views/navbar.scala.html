@@ -28,6 +28,21 @@
         		<span>@Messages("subheader.norway")</span>
         	</a>
         </li>
+
+          <li class="@if(Messages("subheader.estonia") == selectedSubNavbar){active}">
+          <a href="@routes.Application.estonia">
+              <i class=" icon-barcode"></i>
+              <span>@Messages("subheader.estonia")</span>
+          </a>
+          </li>
+
+
+          <li class="@if(Messages("subheader.iceland") == selectedSubNavbar){active}">
+          <a href="@routes.Application.iceland">
+              <i class=" icon-barcode"></i>
+              <span>@Messages("subheader.iceland")</span>
+          </a>
+          </li>
         
       </ul>
     </div><!-- /.navbar-collapse -->

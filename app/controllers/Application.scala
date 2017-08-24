@@ -18,4 +18,12 @@ object Application extends Controller {
     Ok(views.html.norway(Messages("subheader.norway")))
   }
 
+  def estonia = Action {
+    Ok(views.html.estonia(Messages("subheader.estonia")))
+  }
+
+  def iceland = Action {
+    Ok(views.html.iceland(Messages("subheader.iceland")))
+  }
+
 }
