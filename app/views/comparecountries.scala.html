@@ -1,0 +1,64 @@
+@(message: String)
+
+@navbar(message)
+@main(message) {
+
+<div class="main">
+	<div class="container">
+
+		
+		<div class="row">
+		
+			<div class="col-md-12">
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">@Messages("label.line")</h3>
+					</div>
+					<div class="panel-body">
+					<div class="alert alert-danger" role="alert" id="bothsamecountries">
+  						You cannot choose the same country twice. The two countries to be compared should be different.
+					</div>
+					<div>
+						Compare Countries: 
+						<select id="country1">
+							<option value="" disabled="disabled" selected="selected">Choose a country</option>
+							<option value="finland">Finland</option>
+							<option value="norway">Norway</option>
+							<option value="estonia">Estonia</option>
+							<option value="iceland">Iceland</option>
+						</select> 
+						<select id="country2">
+							<option value="" disabled="disabled" selected="selected">Choose a country</option>
+							<option value="finland">Finland</option>
+							<option value="norway">Norway</option>
+							<option value="estonia">Estonia</option>
+							<option value="iceland">Iceland</option>
+						</select>
+					</div>
+					
+					
+					
+					<div>
+					     Show test coverage by: 
+						<input class="x-axis" name="x-axis" type="radio" id = "years" value="year" checked="checked"> Calendar year</input>
+						<input class="x-axis" name="x-axis" type="radio" id = "indicators" value="indicator" > Follow-up time (years)</input>
+						<!--  <input class="x-axis" name="x-axis" type="radio" id = "ages" value="age" > Age</input> -->
+						<p align="right">
+							<select id="chartType"></select>
+                        </p>
+                    </div>
+					<div id="lineChart" class="chart-holder"></div>
+					</div>
+				</div>
+
+			</div><!-- /span12 -->
+			
+		</div><!-- /row -->
+
+		
+
+	</div><!-- /container -->
+
+</div><!-- /main -->
+}
