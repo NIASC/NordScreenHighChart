@@ -43,6 +43,13 @@
               <span>@Messages("subheader.iceland")</span>
           </a>
           </li>
+          
+          <li class="@if(Messages("subheader.comparecountries") == selectedSubNavbar){active}">
+          <a href="@routes.Application.comparecountries">
+              <i class=" icon-barcode"></i>
+              <span>@Messages("subheader.comparecountries")</span>
+          </a>
+          </li>
         
       </ul>
     </div><!-- /.navbar-collapse -->

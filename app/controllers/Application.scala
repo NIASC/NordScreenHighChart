@@ -25,5 +25,9 @@ object Application extends Controller {
   def iceland = Action {
     Ok(views.html.iceland(Messages("subheader.iceland")))
   }
+  
+  def comparecountries = Action {
+    Ok(views.html.comparecountries(Messages("subheader.comparecountries")))
+  }
 
 }

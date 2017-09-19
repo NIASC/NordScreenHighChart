@@ -60,15 +60,15 @@ $(function () {
 	
 	
 	// text files according to indicators
-	var text_file_1 = "http://188.114.242.3:9000/assets/text_files/estonia_year/1.txt";
+	var text_file_1 = httpdomain+"/assets/text_files/estonia_year/1.txt";
 	
 	// text files according to years
-	var text_file_2015 = "http://188.114.242.3:9000/assets/text_files/estonia_indicator/2015.txt";
-	var text_file_2016 = "http://188.114.242.3:9000/assets/text_files/estonia_indicator/2016.txt";
+	var text_file_2015 = httpdomain+"/assets/text_files/estonia_indicator/2015.txt";
+	var text_file_2016 = httpdomain+"/assets/text_files/estonia_indicator/2016.txt";
 	
 	// text files according for age as X-axis
-	var text_age_2015 = "http://188.114.242.3:9000/assets/text_files/estonia_age/2015.txt";
-	var text_age_2016 = "http://188.114.242.3:9000/assets/text_files/estonia_age/2016.txt";
+	var text_age_2015 = httpdomain+"/assets/text_files/estonia_age/2015.txt";
+	var text_age_2016 = httpdomain+"/assets/text_files/estonia_age/2016.txt";
 	
 	// define two possible dropdown list
 	var indicator_dropdown = ["Follow-up time (years)",1];
@@ -194,7 +194,7 @@ $(function () {
 	});       
 	        
 
-	var options_comboChart = {
+	/*var options_comboChart = {
 			chart: {
 				renderTo: 'comboChart'
 			},
@@ -246,7 +246,7 @@ $(function () {
 		};
 	
 
-                $.get('http://188.114.242.3:9000/assets/text_files/combination_chart/norway.txt', function(data) {
+                $.get(httpdomain+'/assets/text_files/combination_chart/norway.txt', function(data) {
     		// Split the lines
     		var lines = data.split('\n');
 
@@ -289,7 +289,7 @@ $(function () {
     			}
     		});
     		var chart = new Highcharts.Chart(options_comboChart);
-    	});
+    	});*/
 		
 	
 });

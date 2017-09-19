@@ -17,3 +17,4 @@ bin
 .cache
 .target
 public/text_files
+.DS_Store
