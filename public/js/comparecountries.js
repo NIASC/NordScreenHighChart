@@ -7,12 +7,7 @@ $(function () {
 	});
 	
 	var xaxis_value = $('input[name=x-axis]:checked').val();
-	var default_text_file_url_country1 = httpdomain+"/assets/text_files/finland_year/5.txt";
-	var default_text_file_url_country2 = httpdomain+"/assets/text_files/norway_year/5.txt";
-	var text_file_url_country1 = "";
-	var text_file_url_country2 = "";
-	var country1 = "";
-	var country2 = "";
+	var countries = [];
 	
 	//Not used currently
 	var series = ["25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "All ages: 30-59 years"];
@@ -85,7 +80,7 @@ $(function () {
 	
 	
 	
-	$("#country1").change(function(){
+	/*$("#country1").change(function(){
 		country1 = $.trim($("#country1").val());
 		if(country1 !== "" && country2 !== ""){
 			if(country1 !== country2){
@@ -134,8 +129,35 @@ $(function () {
 			}
 		}
 	});
-
+*/
 	
+	
+	$('.form-check input[type="checkbox"]').change(function () {
+		countries.length = 0;
+	    if ($(this).closest('.form-check').find('input[type="checkbox"]:checked').length >= 2) {
+	    	$.each($("input[name='countries']:checked"), function(){            
+	    		countries.push($(this).val());
+	        });
+	    	
+	    	$(".x-axis").parent().show();
+	    	
+	    	if($(".x-axis:radio:checked").val() === "year"){
+				fill_dropdown(indicator_dropdown);
+				lineChart.destroy();
+				lineChart =  new Highcharts.Chart(initialChartOptions);
+			}
+			else{
+				fill_dropdown(year_dropdown);
+				lineChart.destroy();
+				lineChart =  new Highcharts.Chart(initialChartOptions);
+			}
+	    }
+	    else{
+	    	$(".x-axis").parent().hide();
+	    	lineChart.destroy();
+			lineChart =  new Highcharts.Chart(initialChartOptions);
+	    }
+	});
 	
 	
 	// define two possible dropdown list
@@ -169,8 +191,8 @@ $(function () {
 	    return this.charAt(0).toUpperCase() + this.slice(1);
 	}
 	
-	function drawLineChart(text_file_url_country1, text_file_url_country2, xaxis_value, type){
-		
+	/*function drawLineChart(text_file_url_country1, text_file_url_country2, xaxis_value, type){
+
 		while (lineChart.series.length > 0) {
         	lineChart.series[0].remove(true);
 		}
@@ -246,7 +268,7 @@ $(function () {
 			$.when(d1, d2).done(function() {
 			     // will fire when j1 AND j2 are both resolved OR rejected
 			     // check j1.isResolved() and j2.isResolved() to find which failed
-				
+				console.log(c1);
 				callback(xaxis_array.sort((a, b) => a - b));
 			});
 						
@@ -291,10 +313,105 @@ $(function () {
 		
 	
 		
+	}*/
+	
+	
+	function compareCountries(arr, xaxis_value, type){
+		
+		while (lineChart.series.length > 0) {
+        	lineChart.series[0].remove(true);
+		}
+		
+		var xaxis_array = [];
+		var xaxis_array_index = [];
+		var xaxis_array_value = [];
+		var c = {}
+		var d = [];
+		
+		$.each(arr, function (i, name) {
+			d[i] = $.Deferred();
+			
+			if(xaxis_value === "year"){
+				var url = httpdomain+"/assets/text_files/"+name+"_year/"+parseInt(type)+".txt";
+			}
+			else{
+				var url = httpdomain+"/assets/text_files/"+name+"_indicator/"+parseInt(type)+".txt";
+			}
+			
+			
+			
+			
+			$.get(url, function(data) {
+					
+						xaxis_array_index.length = 0;
+						xaxis_array_value.length = 0;
+						var array_data = data.split('\n');	
+						var first_line = array_data[0];
+						
+						$.each(first_line.split(','), function(i, v) {
+							if(i > 0 && $.inArray(v, xaxis_array) == -1){
+								xaxis_array.push(v);
+							}
+							if(i > 0){
+								xaxis_array_index.push(v);
+							}
+						});
+						
+						var last_line = array_data[array_data.length - 1];
+						
+						$.each(last_line.split(','), function(i, v) {
+							if(i > 0){
+								xaxis_array_value.push(v);
+							}
+						});
+						c[name]=xaxis_array_value.associate(xaxis_array_index);
+						
+						
+						
+	
+					}
+			).complete(d[i].resolve);
+			
+		});
+		
+		
+		
+		$.when.apply($, d).then(function(){
+			
+			
+			xaxis_array = xaxis_array.sort((a, b) => a - b);
+			var data = [];
+			
+			
+			lineChart.xAxis[0].setCategories(xaxis_array);
+			$.each(c, function(key, value) {
+				data.length = 0;
+			    //console.log(key, value);
+			    
+			    
+			    $(xaxis_array).each(function (i, v) {
+					if(v in value){
+						data.push(parseFloat(value[v]));
+					}
+					else data.push(null);
+					
+					
+					
+				});
+			    lineChart.addSeries({name: key.capitalize(), data:data});
+			});
+			
+			if(xaxis_value === "year"){
+				lineChart.subtitle.update({ text: 'Follow-up time: ' + type + ' years' });
+			}
+			else{
+				lineChart.subtitle.update({ text: 'Calendar year: ' + type });
+			}
+			
+			
+		});
+		
 	}
-	
-	
-	
 	
 	// radio button change function
 	$(".x-axis").change(function() {
@@ -328,15 +445,11 @@ $(function () {
 		var type = this.value;
 	    
 	    if(xaxis_value === "year"){
-	    	text_file_url_country1 = httpdomain+"/assets/text_files/"+country1+"_year/"+parseInt(type)+".txt";
-	    	text_file_url_country2 = httpdomain+"/assets/text_files/"+country2+"_year/"+parseInt(type)+".txt";
-	    	drawLineChart (text_file_url_country1, text_file_url_country2, xaxis_value, type);
+	    	compareCountries(countries, xaxis_value, type);
 	    }
 	    
 	    if(xaxis_value === "indicator"){
-	    	text_file_url_country1 = httpdomain+"/assets/text_files/"+country1+"_indicator/"+parseInt(type)+".txt";
-	    	text_file_url_country2 = httpdomain+"/assets/text_files/"+country2+"_indicator/"+parseInt(type)+".txt";
-	    	drawLineChart (text_file_url_country1, text_file_url_country2, xaxis_value, type);
+	    	compareCountries(countries, xaxis_value, type);
 	    }
 	    
 	    /*if(xaxis_value === "age"){
