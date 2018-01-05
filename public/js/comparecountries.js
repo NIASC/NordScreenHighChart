@@ -1,4 +1,3 @@
-
 $(function () {
 	
 	$(document).ready(function() {
@@ -357,6 +356,7 @@ $(function () {
 							}
 						});
 						
+						
 						var last_line = array_data[array_data.length - 1];
 						
 						$.each(last_line.split(','), function(i, v) {
@@ -402,7 +402,10 @@ $(function () {
 			});
 			
 			if(xaxis_value === "year"){
-				lineChart.subtitle.update({ text: 'Follow-up time: ' + type + ' years' });
+				if(type === "1"){
+					lineChart.subtitle.update({ text: 'Follow-up time: ' + type + ' year' });
+				}
+				else lineChart.subtitle.update({ text: 'Follow-up time: ' + type + ' years' });
 			}
 			else{
 				lineChart.subtitle.update({ text: 'Calendar year: ' + type });

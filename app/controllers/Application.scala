@@ -7,7 +7,11 @@ import play.api.i18n.Messages
 object Application extends Controller {
 
   def index = Action {
-    Ok(views.html.finland(Messages("subheader.finland")))
+    Ok(views.html.sweden(Messages("subheader.sweden")))
+  }
+  
+  def sweden = Action {
+    Ok(views.html.sweden(Messages("subheader.sweden")))
   }
 
   def finland = Action {

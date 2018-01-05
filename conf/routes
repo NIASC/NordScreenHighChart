@@ -4,6 +4,7 @@
 
 # Home page
 GET     				/                           controllers.Application.index
+GET     				/sweden 		            controllers.Application.sweden
 GET     				/finland 		            controllers.Application.finland
 GET     				/norway 		            controllers.Application.norway
 GET     				/estonia 		            controllers.Application.estonia

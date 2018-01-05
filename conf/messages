@@ -1,5 +1,6 @@
 
 #Header
+subheader.sweden=Sweden
 subheader.finland=Finland
 subheader.norway=Norway
 subheader.estonia=Estonia
@@ -9,7 +10,7 @@ subheader.comparecountries=Compare Countries
 
 
 #Chart Labels
-label.line=Line Chart
+label.line=Test Coverage
 label.time=Time Series
 label.bar=Bar Chart
 label.stacked=Stacked Bar Chart

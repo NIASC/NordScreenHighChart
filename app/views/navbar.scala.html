@@ -16,6 +16,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+      	<li class="@if(Messages("subheader.sweden") == selectedSubNavbar){active}">
+        	<a href="@routes.Application.sweden">
+        		<i class="icon-tasks"></i>
+        		<span>@Messages("subheader.sweden")</span>
+        	</a>
+        </li>
         <li class="@if(Messages("subheader.finland") == selectedSubNavbar){active}">
         	<a href="@routes.Application.finland">
         		<i class="icon-tasks"></i>
