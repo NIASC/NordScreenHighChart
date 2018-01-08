@@ -379,8 +379,9 @@ $(function () {
 		$.when.apply($, d).then(function(){
 			
 			
-			//xaxis_array = xaxis_array.sort((a, b) => a - b);
-			xaxis_array = xaxis_array.sort();
+			//xaxis_array = xaxis_array.sort((a, b) => a - b); //Does not work on IE
+			//xaxis_array = xaxis_array.sort(); //Does not work with numbers
+			xaxis_array = xaxis_array.sort(function(a, b){ return a - b; }); //Sorts items as numbers (integers and floating points; both are treated as numbers)
 			//console.log(xaxis_array);
 			var data = [];
 			
