@@ -218,8 +218,9 @@ $(function () {
 		
 		$.when(d).done(function() {
 		
-			xaxis_array = xaxis_array.sort((a, b) => a - b);
-			
+			//xaxis_array = xaxis_array.sort((a, b) => a - b);
+			//xaxis_array = xaxis_array.sort();
+			//console.log(xaxis_array);
 			lineChart.xAxis[0].setCategories(xaxis_array);
 
 			$.each(c, function(key, value) {

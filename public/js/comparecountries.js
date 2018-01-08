@@ -379,7 +379,9 @@ $(function () {
 		$.when.apply($, d).then(function(){
 			
 			
-			xaxis_array = xaxis_array.sort((a, b) => a - b);
+			//xaxis_array = xaxis_array.sort((a, b) => a - b);
+			xaxis_array = xaxis_array.sort();
+			//console.log(xaxis_array);
 			var data = [];
 			
 			
