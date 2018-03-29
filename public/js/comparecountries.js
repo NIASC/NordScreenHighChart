@@ -383,12 +383,15 @@ $(function () {
 			//xaxis_array = xaxis_array.sort(); //Does not work with numbers
 			xaxis_array = xaxis_array.sort(function(a, b){ return a - b; }); //Sorts items as numbers (integers and floating points; both are treated as numbers)
 			//console.log(xaxis_array);
-			var data = [];
+			//var data = []; //Reusing the same array does not work on downloading image of the chart. 
+							//The series data is not updated in such case and takes the latest data of iteration.
+							//All the countries show the same series data when the chart image is downloaded.
 			
 			
 			lineChart.xAxis[0].setCategories(xaxis_array);
 			$.each(c, function(key, value) {
-				data.length = 0;
+				//data.length = 0; //Reusing the same array does not work on downloading image of the chart. 
+				var data = []; //New array needs to be defined for each iteration.
 			    //console.log(key, value);
 			    
 			    
